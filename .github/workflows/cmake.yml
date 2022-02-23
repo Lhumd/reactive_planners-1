@@ -53,6 +53,7 @@ jobs:
         id: clone_and_build_dep
         uses: machines-in-motion/mim_github_actions/treep_clone_and_build@main
         with:
+          token: ${{ secrets.GITHUB_TOKEN}}
           treep_configurations: |
             git@github.com:machines-in-motion/treep_machines_in_motion.git
           projects_or_repos: |
