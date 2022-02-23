@@ -23,8 +23,21 @@ jobs:
       #
       # Setup the machines and build environment
       #
-#       - name: Setup Ubuntu18.04.
-#         uses: Lhumd/ubuntu_installation_scripts/.github/workflows@elham/Action
+
+      - uses: actions/checkout@v2
+
+      - name: "install git"
+        shell: bash 
+        run: |
+          sudo apt-get update
+          sudo apt-get install git
+        
+      - name: "run ubuntu installation scripts"
+        shell: bash 
+        run: |
+          git clone https://github.com/Lhumd/ubuntu_installation_scripts.git
+          cd ubuntu_installation_scripts/official
+          sudo ./setup_ubuntu install all
 
       #
       # Checkout the current package locally
@@ -38,15 +51,7 @@ jobs:
       - name: Spawn ssh-agent
         uses: webfactory/ssh-agent@v0.5.2
         with:
-          ssh-private-key: ${{ secrets.GA_SSH_PRIVATE_KEY }}
-          
-      - name: Setup Ubuntu18.04.
-        uses: actions/checkout@v2
-        with:
-          repository: Lhumd/ubuntu_installation_scripts
-          token: ${{ secrets.GITHUB_TOKEN}}
-          path: ./.github/workflows
-      
+          ssh-private-key: ${{ secrets.GA_SSH_PRIVATE_KEY }}      
 
       #
       # Clone the dependencies that needs to be built.
