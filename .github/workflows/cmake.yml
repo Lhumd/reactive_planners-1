@@ -23,8 +23,14 @@ jobs:
       #
       # Setup the machines and build environment
       #
+#       - name: Setup Ubuntu18.04.
+#         uses: Lhumd/ubuntu_installation_scripts/.github/workflows@elham/Action
       - name: Setup Ubuntu18.04.
-        uses: Lhumd/ubuntu_installation_scripts/.github/workflows@elham/Action
+        uses: actions/checkout@v2
+        with:
+          repository: Lhumd/ubuntu_installation_scripts
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: ./.github/workflows
       
       #
       # Checkout the current package locally
