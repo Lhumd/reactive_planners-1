@@ -30,6 +30,16 @@ jobs:
       - name: Checkout current repo.
         uses: actions/checkout@v2
 
+
+      #
+      # Activate the secret ssh key
+      
+      - name: Spawn ssh-agent
+        uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.GA_SSH_PRIVATE_KEY }}      
+
+
       - name: "install git"
         shell: bash 
         run: |
@@ -42,14 +52,6 @@ jobs:
           git clone https://github.com/Lhumd/ubuntu_installation_scripts.git
           cd ubuntu_installation_scripts/official
           sudo ./setup_ubuntu install all
-
-      #
-      # Activate the secret ssh key
-      
-      - name: Spawn ssh-agent
-        uses: webfactory/ssh-agent@v0.5.2
-        with:
-          ssh-private-key: ${{ secrets.GA_SSH_PRIVATE_KEY }}      
 
       #
       # Clone the dependencies that needs to be built.
