@@ -24,7 +24,11 @@ jobs:
       # Setup the machines and build environment
       #
 
-      - uses: actions/checkout@v2
+      #
+      # Checkout the current package locally
+      #
+      - name: Checkout current repo.
+        uses: actions/checkout@v2
 
       - name: "install git"
         shell: bash 
@@ -38,12 +42,6 @@ jobs:
           git clone https://github.com/Lhumd/ubuntu_installation_scripts.git
           cd ubuntu_installation_scripts/official
           sudo ./setup_ubuntu install all
-
-      #
-      # Checkout the current package locally
-      #
-      - name: Checkout current repo.
-        uses: actions/checkout@v2
 
       #
       # Activate the secret ssh key
